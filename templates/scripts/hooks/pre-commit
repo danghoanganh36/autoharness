@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+# Pre-commit gate. Seconds only: anything slower gets bypassed with
+# --no-verify, and a gate people route around is not a gate.
+#
+# Install with: {{RUN}} hooks:install
+#
+# Uses grep, not rg. rg is not installed everywhere, and a pipeline that
+# swallows a missing binary reports success for a check it never ran — which
+# is how a staged secret gets through. Hence require() below: this hook
+# refuses to pass a check whose tooling is missing.
+set -uo pipefail
+cd "$(git rev-parse --show-toplevel)"
+
+require() {
+  command -v "$1" >/dev/null 2>&1 || {
+    printf '\n[pre-commit] %s is required by this hook and was not found.\n' "$1"
+    printf '[pre-commit] Refusing to pass a check it cannot actually run.\n'
+    exit 1
+  }
+}
+require grep
+require git
+
+staged=$(git diff --cached --name-only --diff-filter=ACM)
+[ -z "$staged" ] && exit 0
+
+fail=0
+say() { printf '\n[pre-commit] %s\n' "$1"; }
+
+# --- hard rule 1: no secrets in tracked files --------------------------------
+# An assignment with a real-looking value, not the word "secret" in prose:
+# documentation discusses key names constantly, and a hook that fires on prose
+# is a hook that gets uninstalled.
+secret_hits=$(git diff --cached -U0 -- $staged \
+  | grep -E '^\+' \
+  | grep -Ei '(api[_-]?key|secret|token|password|passwd)["'"'"']?[[:space:]]*[:=][[:space:]]*["'"'"'][A-Za-z0-9/_+=-]{16,}' \
+  || true)
+if [ -n "$secret_hits" ]; then
+  say "possible secret in staged changes:"
+  printf '%s\n' "$secret_hits"
+  say "AGENTS.md hard rule 1. Move it to an env var, or stage without that line."
+  fail=1
+fi
+
+# --- hard rule 1, second half: never commit a credential file ----------------
+env_files=$(printf '%s\n' "$staged" | grep -E '(^|/)\.env($|\.)|\.pem$|\.p12$|\.keystore$' || true)
+if [ -n "$env_files" ]; then
+  say "credential file staged:"
+  printf '%s\n' "$env_files"
+  fail=1
+fi
+
+# --- the fast gates ----------------------------------------------------------
+if printf '%s\n' "$staged" | grep -qE '\.(ts|tsx|mjs|cjs|js|jsx)$'; then
+{{HOOK_CODE_GATES}}
+fi
+
+if printf '%s\n' "$staged" | grep -qE '\.md$'; then
+  {{RUN}} --silent lint:docs > /dev/null || { say "{{RUN}} lint:docs failed"; fail=1; }
+fi
+
+if [ "$fail" -ne 0 ]; then
+  say "commit blocked. Fix the above, or use --no-verify and say so in the message."
+fi
+exit "$fail"

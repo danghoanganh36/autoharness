@@ -1,0 +1,23 @@
+{
+  "name": "autoharness",
+  "version": "0.1.0",
+  "description": "Scaffold a harness-engineering setup (instructions, state, verification, scope, lifecycle, steering) into any repository.",
+  "type": "module",
+  "private": true,
+  "license": "UNLICENSED",
+  "bin": {
+    "autoharness": "./bin/autoharness.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "bin",
+    "src",
+    "templates"
+  ],
+  "scripts": {
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {}
+}

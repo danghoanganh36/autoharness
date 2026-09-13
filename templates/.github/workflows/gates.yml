@@ -1,0 +1,26 @@
+# Every gate this repository owns, run without anyone remembering to.
+#
+# Sensors that only run when a person chooses to type the command are not
+# sensors; they are suggestions. This file is what makes the verification
+# subsystem unattended.
+name: gates
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+jobs:
+  gates:
+    name: fast gates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: {{NODE_VERSION}}
+          cache: {{CACHE_KEY}}
+      - run: {{CI_INSTALL}}
+      # Not short-circuited: a run that stops at the first failure hides the
+      # rest, and the point of CI is one report rather than four attempts.
+{{CI_GATE_STEPS}}

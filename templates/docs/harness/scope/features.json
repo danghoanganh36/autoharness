@@ -1,0 +1,12 @@
+{
+  "note": "Harness scope lives here, not in prose. Each entry is a triple: behavior, verification command, state. State machine: not_started -> active -> passing | blocked. 'passing' is irreversible and may only be set by a green verification command. Work on exactly ONE 'active' entry at a time (WIP=1). Entries must be completable in one session inside this repository.",
+  "features": [
+    {
+      "id": "H01",
+      "behavior": "REPLACE ME: state what is observably true when this works",
+      "verification": "the command that proves it, e.g. {{RUN}} test",
+      "state": "not_started",
+      "evidence": ""
+    }
+  ]
+}
