@@ -41,13 +41,12 @@ autoharness doctor   report which harness controls are present and wired
 ```
 AGENTS.md                        the router: session protocol, hard rules, sensors, exit checklist
 docs/README.md                   the documentation map
-docs/harness/                    six subsystems, documented
+docs/harness/                    five subsystems, documented
   instructions/                  1 📋  what the agent is told before it acts
   state/                         2 💾  progress.md, decisions.md
-  verification/                  3 ✅  the gate inventory and the review rubric
-  scope/                         4 🎯  features.json — one feature at a time, WIP=1
+  verification/                  3 ✅  the gates, the review rubric, what each control caught
+  scope/                         4 🎯  features.json — one feature at a time, WIP=1; gap analysis
   lifecycle/                     5 🔄  how a session starts and ends
-  steering/                      🔁    the loop that maintains the other five
 docs/reference/                  ground truth: the system as it is
 docs/skills/_template/SKILL.md   copy per area of the codebase
 scripts/init.sh                  the bootstrap contract, four stages

@@ -2,7 +2,7 @@
 
 Subsystem 4. [features.json](./features.json) is the only place a feature's
 status lives. Prose elsewhere may explain *why* an item matters
-([../steering/gap-analysis.md](../steering/gap-analysis.md) does exactly that),
+([gap-analysis.md](./gap-analysis.md) does exactly that),
 but it must not restate status, or the two will drift.
 
 ## Every entry is a triple

@@ -9,9 +9,8 @@ and what would make this worth revisiting.
 
 ## {{TODAY}} — adopt a harness
 
-**Decided.** Scaffold the six-subsystem harness into this repository:
-instructions, state, verification, scope, lifecycle, and the steering loop that
-maintains them.
+**Decided.** Scaffold the five-subsystem harness into this repository:
+instructions, state, verification, scope, and lifecycle.
 
 **Rejected.** Keeping guidance in prose in the README, and relying on each
 session to remember the conventions.

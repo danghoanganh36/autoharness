@@ -6,7 +6,7 @@ the next session reads first.
 
 ## {{TODAY}} — harness installed
 
-**Done.** `autoharness init` scaffolded the six harness subsystems, the docs
+**Done.** `autoharness init` scaffolded the five harness subsystems, the docs
 sensor, the pre-commit hook{{#if CI}} and the CI workflow{{/if CI}}.
 
 **Found.** Nothing yet.

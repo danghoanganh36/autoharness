@@ -18,8 +18,8 @@ codebase cannot support, and every downstream decision inherits the error.
 
 The moment a file here stops being true, fix it or move it. Letting this
 directory drift is the defect
-[../harness/steering/README.md](../harness/steering/README.md) exists to
-prevent.
+[../harness/verification/README.md](../harness/verification/README.md#when-a-defect-escapes)
+exists to prevent.
 
 ## Suggested contents
 

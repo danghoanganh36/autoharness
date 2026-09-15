@@ -1,7 +1,7 @@
 # Gap analysis
 
 Reasoning for each harness feature id. Status lives in
-[../scope/features.json](../scope/features.json) and **must not** be restated
+[features.json](./features.json) and **must not** be restated
 here in prose, or the two will drift.
 
 Headings are the exception, and they are checked: `{{RUN}} lint:docs` requires

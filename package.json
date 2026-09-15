@@ -1,7 +1,7 @@
 {
   "name": "autoharness",
   "version": "0.1.0",
-  "description": "Scaffold a harness-engineering setup (instructions, state, verification, scope, lifecycle, steering) into any repository.",
+  "description": "Scaffold a harness-engineering setup (instructions, state, verification, scope, lifecycle) into any repository.",
   "type": "module",
   "private": true,
   "license": "UNLICENSED",
