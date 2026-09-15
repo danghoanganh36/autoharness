@@ -4,7 +4,7 @@ Four directories, and the difference between them is the whole point.
 
 | Directory | Holds | Trust it? |
 |---|---|---|
-| [harness/](./harness/) | The harness itself: instructions, state, verification, scope, lifecycle, steering | Yes — `{{RUN}} lint:docs` checks its paths |
+| [harness/](./harness/) | The harness itself: instructions, state, verification, scope, lifecycle | Yes — `{{RUN}} lint:docs` checks its paths |
 | [reference/](./reference/) | The system as it actually is | Yes — and fix it the moment it stops being true |
 | [skills/](./skills/) | Task guides, opened on demand, one per area | Yes, as intent. Verify specifics against the code |
 | `vision/` | Designs for software that does not exist yet. Create it only if you need it, and put a warning banner on every file | **No.** Nothing here describes what runs |

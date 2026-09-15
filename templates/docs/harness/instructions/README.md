@@ -60,5 +60,5 @@ skills keeps the instructions that are actually loaded relevant to the task.
 
 ## Guides that should exist but do not
 
-Track them in [gap-analysis.md](../steering/gap-analysis.md), not here. This
+Track them in [gap-analysis.md](../scope/gap-analysis.md), not here. This
 page describes what is in place.

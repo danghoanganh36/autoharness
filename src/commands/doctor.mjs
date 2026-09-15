@@ -22,8 +22,7 @@ const SUBSYSTEMS = [
   ['✅ Verification', 'docs/harness/verification/README.md'],
   ['✅ Verification', 'scripts/check-docs.mjs'],
   ['🎯 Scope', 'docs/harness/scope/features.json'],
-  ['🔄 Lifecycle', 'scripts/init.sh'],
-  ['🔁 Steering', 'docs/harness/steering/README.md']
+  ['🔄 Lifecycle', 'scripts/init.sh']
 ]
 
 const GATE = /^(typecheck|lint|test|build|format)(:[a-z0-9-]+)?$/

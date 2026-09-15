@@ -193,8 +193,8 @@ function checkGateCoverage() {
  * short hand-written map rather than a clever regex: a loose one would fire on
  * every past-tense sentence in the repository.
  *
- * Only files that describe the present are checked. state/ and steering/ are
- * logs and changelogs — "there was no formatter" is true there and must stay
+ * Only files that describe the present are checked. state/, gap-analysis.md and
+ * effectiveness.md are logs and changelogs — "there was no formatter" is true there and must stay
  * sayable.
  */
 const CAPABILITY_CLAIMS = [
@@ -282,7 +282,7 @@ function checkPendingClaims() {
  */
 function checkGapAnalysisHeadings() {
   const found = []
-  const rel = 'docs/harness/steering/gap-analysis.md'
+  const rel = 'docs/harness/scope/gap-analysis.md'
   const file = join(root, rel)
   if (!existsSync(file) || !existsSync(FEATURES)) return found
 

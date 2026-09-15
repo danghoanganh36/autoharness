@@ -103,12 +103,35 @@ It also checks three claims prose makes about the repository's own tooling:
    `features.json` says that id passes.
 
 Only files that describe the *present* are checked for 2 and 3: `AGENTS.md` and
-the harness READMEs. `state/` and `steering/` are logs, where "there was no
+the harness READMEs. `state/`, `gap-analysis.md` and `effectiveness.md` are logs, where "there was no
 formatter" is true and must stay sayable.
 
 These exist because a path check verifies that files exist, not that a sentence
 about the repository is still true — and a stale sentence in `AGENTS.md` is
 read by every session.
+
+## When a defect escapes
+
+A defect that reaches review means a sensor is missing. Turn it into a control:
+
+1. **Detect** — record the concrete symptom, not a feeling.
+2. **Triage** — real defect or false positive? A sensor that cries wolf gets ignored.
+3. **Upgrade** — add the control at the cheapest stage that holds it:
+
+| Symptom | Fix goes in |
+|---|---|
+| Same mechanical mistake, 3rd time | A hard rule in `/AGENTS.md`, with its check command |
+| Agent lacked domain context | The matching `docs/skills/*/SKILL.md` |
+| Agent believed something untrue | `docs/reference/` — and find out why it was wrong there |
+| Structural invariant broken | A type contract or a new automated check |
+| Behaviour regressed silently | A test |
+| Judgment call went badly | A human gate. Do not automate a decision with real consequences |
+
+4. **Verify** — show the new control catches the old defect. An unverified rule is a guess.
+
+Record what each control has actually caught, with escape and repeat rates, in
+[effectiveness.md](./effectiveness.md). A control that has never fired is either
+guarding something that never happens, or checking nothing.
 
 ## The inferential cell
 
