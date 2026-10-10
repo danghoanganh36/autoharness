@@ -11,7 +11,7 @@ passes.
 ## Format
 
 ```markdown
-### H01 <short name>
+### Hnn <short name>
 
 **Quadrant.** Which of the four cells this fills.
 **Symptom.** What went wrong, or what would go unnoticed without it.

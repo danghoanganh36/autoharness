@@ -1,0 +1,19 @@
+{
+  "note": "Harness scope lives here, not in prose. Each entry is a triple: behavior, verification command, state. State machine: not_started -> active -> passing | blocked. 'passing' is irreversible and may only be set by a green verification command. Work on exactly ONE 'active' entry at a time (WIP=1). Entries must be completable in one session inside this repository.",
+  "features": [
+    {
+      "id": "H01",
+      "behavior": "The harness is installed and every document names only paths that exist.",
+      "verification": "npm run lint:docs",
+      "state": "passing",
+      "evidence": "2026-10-03: npm run lint:docs exited 0 (docs paths OK — 33 markdown files scanned)"
+    },
+    {
+      "id": "H02",
+      "behavior": "The smoke test runs as a gate named `test`, listed in the Sensors section of AGENTS.md.",
+      "verification": "npm run test",
+      "state": "not_started",
+      "evidence": ""
+    }
+  ]
+}
