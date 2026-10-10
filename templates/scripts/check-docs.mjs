@@ -44,14 +44,25 @@ const SKIP_DIRS = new Set([
   'release',
   'coverage',
   'playwright-report',
-  'test-results'
+  'test-results',
+  'Pods',
+  'vendor'
 ])
+
+/**
+ * This repository's own exemptions: exact documents, or directory prefixes
+ * ending in a slash. Vendored material and designs for code that is not
+ * written yet belong here; so does a pre-harness document that has not been
+ * reconciled, as long as features.json carries the entry that removes it.
+ */
+const PROJECT_SKIP = []
 
 /**
  * Documents exempt from the path check. Aspirational designs and quoted
  * outside material describe repositories that are not this one.
  */
 const SKIP_DOC = (rel) =>
+  PROJECT_SKIP.some((p) => (p.endsWith('/') ? rel.startsWith(p) : rel === p)) ||
   rel.startsWith('docs/vision/') ||
   rel.startsWith('docs/research/') ||
   rel === 'docs/harness/verification/review.md' ||
@@ -65,7 +76,10 @@ function walk(dir, hits = []) {
   for (const name of readdirSync(dir)) {
     if (SKIP_DIRS.has(name)) continue
     const full = join(dir, name)
-    if (statSync(full).isDirectory()) walk(full, hits)
+    // A dangling symlink has a name and no target; it is not a document.
+    const stat = statSync(full, { throwIfNoEntry: false })
+    if (!stat) continue
+    if (stat.isDirectory()) walk(full, hits)
     else if (name.endsWith('.md')) hits.push(full)
   }
   return hits
@@ -77,6 +91,9 @@ function isPathClaim(token) {
   if (/\s|[*?<>|$(){}[\]…]/.test(token)) return false
   if (/:\/\/|^https?:|^@|^ws:|^wss:|^file:/.test(token)) return false
   if (/^\.\/[^/]+$/.test(token)) return false // `./certs` — compose mount syntax
+  // `org/image:tag` is a Docker image. A path with a line number keeps its
+  // extension before the colon, so `src/a.ts:12` is still checked.
+  if (/^[^:]+:[^:/]+$/.test(token) && !/\.[A-Za-z0-9]+:/.test(token)) return false
   if (GENERATED.test(token) || token.includes('/node_modules/')) return false
   // Must look like a file or a directory. `library/image-name` is a Docker
   // image, not a path, and has neither an extension nor a trailing slash.
