@@ -9,7 +9,7 @@
     "autoharness": "./bin/autoharness.mjs"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=26"
   },
   "files": [
     "bin",
